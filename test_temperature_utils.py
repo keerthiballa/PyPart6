@@ -82,3 +82,19 @@ class TemperatureUtilsTest(unittest.TestCase):
         for temp_in, expected in test_cases:
             with self.subTest(f"{temp_in} -> {expected}"):
                 self.assertEqual(expected, temperature_utils_v2.convert_celsius_to_kelvin(temp_in))
+
+    def test_temperature_tuple_v2(self):
+        temps_input = (-273.15, -241.15, -173.15, 0)
+        expected = ((-273.15,0),(-241.15,32),(-173.15,100),(0,273.15))
+        actual = temperature_utils_v2.temperature_tuple_v2(temps_input, "c","k")
+        self.assertEqual(expected, actual)
+
+    def test2_temperature_tuple_v2(self):
+        temps_input = (-459.67, -402.07, -279.67)
+        expected = ((-459.67,0),(-402.07,32),(-279.67,100))
+        actual = temperature_utils_v2.temperature_tuple_v2(temps_input, "f", "k")
+        self.assertEqual(expected, actual)
+
+    def test3_temperature_tuple_v2(self):
+        temps_input = (1, 2, 3)
+        self.assertEqual(tuple(), temperature_utils_v2.temperature_tuple_v2(temps_input,"a", "h"))
